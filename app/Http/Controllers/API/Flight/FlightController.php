@@ -8,6 +8,7 @@ use App\Http\Requests\Flight\StoreFlightRequest;
 use App\Http\Requests\Flight\UpdateFlightRequest;
 use App\Http\Requests\Flight\PartialUpdateFlightRequest;
 use App\Services\Flight\FlightService;
+use Illuminate\Http\Request;
 
 class FlightController extends Controller
 {
@@ -18,9 +19,20 @@ class FlightController extends Controller
     $this->service = $service;
   }
 
-  public function index()
+  public function index(Request $request)
   {
-    $response = $this->service->getAll();
+
+    $origen = $request->query('origen');
+    $destino = $request->query('destino');
+    $fecha = $request->query('fecha');
+
+    $querys = [
+      "origen" => $origen,
+      "destino" => $destino,
+      "fecha" => $fecha,
+    ];
+
+    $response = $this->service->getAll($querys);
 
     if ($response['error'])
       return ResponseFormatter::error($response['message'], $response['code']);

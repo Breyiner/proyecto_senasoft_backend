@@ -7,9 +7,16 @@ use Illuminate\Support\Arr;
 
 class FlightService
 {
-  public static function getAll()
+  public static function getAll($querys = null)
   {
-    $flights = Flight::all();
+    if (!$querys)
+      $flights = Flight::all();
+
+    else
+      $flights = Flight::where('origin_city_id', $querys['origen'])
+        ->where('destination_city_id', $querys['destino'])
+        ->whereDate('departure_date', $querys['fecha'])
+        ->get();
 
     if ($flights->isEmpty()) {
       return [
@@ -19,6 +26,20 @@ class FlightService
         "data" => $flights,
       ];
     }
+
+    $flights = $flights->map(function ($flight) {
+
+      return [
+        "id" => 3,
+        "plane" => $flight->plane->name,
+        "origin_city" => $flight->originCity->name,
+        "destination_city" => $flight->destinationCity->name,
+        "departure_date" => "2025-11-03",
+        "departure_time" => "15:20:00",
+        "duration_hours" => 1,
+        "price" => "220000.00",
+      ];
+    });
 
     return [
       "error" => false,
