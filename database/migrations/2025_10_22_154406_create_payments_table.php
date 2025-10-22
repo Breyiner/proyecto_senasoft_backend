@@ -18,11 +18,9 @@ return new class extends Migration
       $table->string('document_number');
       $table->string('email')->nullable();
       $table->string('phone')->nullable();
-      $table->unsignedBigInteger('payment_method_id');
       $table->timestamps();
 
       $table->foreign('document_type_id')->references('id')->on('document_types');
-      $table->foreign('payment_method_id')->references('id')->on('payment_methods');
     });
   }
 

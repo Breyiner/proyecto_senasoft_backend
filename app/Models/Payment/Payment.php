@@ -24,9 +24,5 @@ class Payment extends Model
   {
     return $this->belongsTo(DocumentType::class);
   }
-
-  public function paymentMethod()
-  {
-    return $this->belongsTo(PaymentMethod::class);
-  }
+  
 }

@@ -19,7 +19,6 @@ class UpdatePaymentRequest extends FormRequest
       'document_number' => 'required|string|max:30',
       'email' => 'nullable|email|max:100',
       'phone' => 'nullable|string|max:20',
-      'payment_method_id' => 'required|exists:payment_methods,id',
     ];
   }
 
@@ -42,9 +41,6 @@ class UpdatePaymentRequest extends FormRequest
 
       'phone.string' => 'El :attribute debe ser texto.',
       'phone.max' => 'El :attribute no debe tener más de :max caracteres.',
-
-      'payment_method_id.required' => 'El :attribute es obligatorio.',
-      'payment_method_id.exists' => 'El :attribute seleccionado no es válido.',
     ];
   }
 
@@ -56,7 +52,6 @@ class UpdatePaymentRequest extends FormRequest
       'document_number' => 'número de documento',
       'email' => 'correo',
       'phone' => 'teléfono',
-      'payment_method_id' => 'método de pago',
     ];
   }
 }

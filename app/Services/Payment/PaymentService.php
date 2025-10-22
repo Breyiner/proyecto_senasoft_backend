@@ -78,7 +78,6 @@ class PaymentService
       'document_number',
       'email',
       'phone',
-      'payment_method_id'
     ]));
 
     return [

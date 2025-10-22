@@ -116,20 +116,6 @@ Route::prefix('flights')->group(function () {
   Route::delete('/{flight}', [FlightController::class, 'destroy']);
 });
 
-Route::prefix('payment_methods')->group(function () {
-  Route::get('/', [PaymentMethodController::class, 'index']);
-
-  Route::get('/{payment_method}', [PaymentMethodController::class, 'show']);
-
-  Route::post('/', [PaymentMethodController::class, 'store']);
-
-  Route::put('/{payment_method}', [PaymentMethodController::class, 'update']);
-
-  Route::patch('/{payment_method}', [PaymentMethodController::class, 'partialUpdate']);
-  
-  Route::delete('/{payment_method}', [PaymentMethodController::class, 'destroy']);
-});
-
 Route::prefix('payments')->group(function () {
   Route::get('/', [PaymentController::class, 'index']);
 

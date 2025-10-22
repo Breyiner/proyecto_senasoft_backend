@@ -36,7 +36,6 @@ class DatabaseSeeder extends Seeder
         AirportSeeder::class,
         PlaneSeeder::class,
         FlightSeeder::class,
-        PaymentMethodSeeder::class,
         PaymentSeeder::class,
         BookingSeeder::class,
         BookingUserSeeder::class,

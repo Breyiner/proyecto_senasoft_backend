@@ -19,7 +19,6 @@ class PartialUpdatePaymentRequest extends FormRequest
       'document_number' => 'sometimes|string|max:30',
       'email' => 'sometimes|email|max:100',
       'phone' => 'sometimes|string|max:20',
-      'payment_method_id' => 'sometimes|exists:payment_methods,id',
     ];
   }
 
@@ -40,7 +39,6 @@ class PartialUpdatePaymentRequest extends FormRequest
       'phone.string' => 'El :attribute debe ser texto.',
       'phone.max' => 'El :attribute no debe tener más de :max caracteres.',
       
-      'payment_method_id.exists' => 'El :attribute seleccionado no es válido.',
     ];
   }
 
@@ -52,7 +50,6 @@ class PartialUpdatePaymentRequest extends FormRequest
       'document_number' => 'número de documento',
       'email' => 'correo',
       'phone' => 'teléfono',
-      'payment_method_id' => 'método de pago',
     ];
   }
 }
