@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Booking\Booking;
 use App\Models\DocumentType\DocumentType;
 use App\Models\Gender\Gender;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -63,5 +64,12 @@ class User extends Authenticatable
 
   public function documentType() {
     return $this->belongsTo(DocumentType::class);
+  }
+
+  public function booking()
+  {
+    return $this->belongsToMany(Booking::class)
+      ->withPivot('seat_number')
+      ->withTimestamps();
   }
 }

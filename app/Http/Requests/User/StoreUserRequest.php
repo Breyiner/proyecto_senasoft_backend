@@ -24,7 +24,7 @@ class StoreUserRequest extends FormRequest
       'child_condition'     => 'boolean',
       'cellphone_number'    => 'nullable|string|max:20',
       'email'               => 'required|email|unique:users,email',
-      'password'            => 'required|string|min:6',
+      'password'            => 'sometimes|string|min:6',
     ];
   }
 
@@ -64,7 +64,6 @@ class StoreUserRequest extends FormRequest
       'email.email'                  => 'El :attribute debe ser válido.',
       'email.unique'                 => 'El :attribute ya está registrado.',
 
-      'password.required'            => 'La :attribute es obligatoria.',
       'password.string'              => 'La :attribute debe ser texto.',
       'password.min'                 => 'La :attribute debe tener al menos :min caracteres.',
     ];

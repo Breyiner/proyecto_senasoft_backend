@@ -23,7 +23,7 @@ return new class extends Migration
       $table->boolean('child_condition')->default(false);
       $table->string('cellphone_number')->nullable();
       $table->string('email')->unique();
-      $table->string('password');
+      $table->string('password')->nullable()->default(null);
       $table->timestamps();
 
       $table->foreign('document_type_id')->references('id')->on('document_types');

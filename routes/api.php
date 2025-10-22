@@ -3,6 +3,7 @@
 use App\Enums\TokenAbility;
 use App\Http\Controllers\API\Airport\AirportController;
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\Booking\BookingController;
 use App\Http\Controllers\API\City\CityController;
 use App\Http\Controllers\API\DocumentType\DocumentTypeController;
 use App\Http\Controllers\API\Flight\FlightController;
@@ -141,6 +142,20 @@ Route::prefix('payments')->group(function () {
   Route::patch('/{payment}', [PaymentController::class, 'partialUpdate']);
   
   Route::delete('/{payment}', [PaymentController::class, 'destroy']);
+});
+
+Route::prefix('bookings')->group(function () {
+  Route::get('/', [BookingController::class, 'index']);
+
+  Route::get('/{booking}', [BookingController::class, 'show']);
+
+  Route::post('/', [BookingController::class, 'store']);
+  
+  Route::put('/{booking}', [BookingController::class, 'update']);
+  
+  Route::patch('/{booking}', [BookingController::class, 'partialUpdate']);
+  
+  Route::delete('/{booking}', [BookingController::class, 'destroy']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);

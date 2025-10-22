@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Database\Seeders\Airport\AirportSeeder;
+use Database\Seeders\Booking\BookingSeeder;
+use Database\Seeders\BookingUser\BookingUserSeeder;
 use Database\Seeders\City\CitySeeder;
 use Database\Seeders\DocumentType\DocumentTypeSeeder;
 use Database\Seeders\Flight\FlightSeeder;
@@ -24,12 +26,6 @@ class DatabaseSeeder extends Seeder
    */
   public function run(): void
   {
-    // // User::factory(10)->create();
-
-    // User::factory()->create([
-    //     'name' => 'Test User',
-    //     'email' => 'test@example.com',
-    // ]);
 
     $this->call(
       [
@@ -42,6 +38,8 @@ class DatabaseSeeder extends Seeder
         FlightSeeder::class,
         PaymentMethodSeeder::class,
         PaymentSeeder::class,
+        BookingSeeder::class,
+        BookingUserSeeder::class,
     ]);
   }
 }
