@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Seeders\Airport\AirportSeeder;
 use Database\Seeders\City\CitySeeder;
 use Database\Seeders\DocumentType\DocumentTypeSeeder;
 use Database\Seeders\Gender\GenderSeeder;
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
         DocumentTypeSeeder::class,
         UserSeeder::class,
         CitySeeder::class,
+        AirportSeeder::class,
     ]);
   }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\TokenAbility;
+use App\Http\Controllers\API\Airport\AirportController;
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\City\CityController;
 use App\Http\Controllers\API\DocumentType\DocumentTypeController;
@@ -64,8 +65,22 @@ Route::prefix('cities')->group(function () {
   Route::put('/{city_id}', [CityController::class, 'update']);
 
   Route::patch('/{city_id}', [CityController::class, 'partialUpdate']);
-  
+
   Route::delete('/{city_id}', [CityController::class, 'destroy']);
+});
+
+Route::prefix('airports')->group(function () {
+  Route::get('/', [AirportController::class, 'index']);
+
+  Route::get('/{airport}', [AirportController::class, 'show']);
+
+  Route::post('/', [AirportController::class, 'store']);
+
+  Route::put('/{airport}', [AirportController::class, 'update']);
+
+  Route::patch('/{airport}', [AirportController::class, 'partialUpdate']);
+  
+  Route::delete('/{airport}', [AirportController::class, 'destroy']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);
