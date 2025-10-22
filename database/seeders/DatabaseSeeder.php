@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Seeders\DocumentType\DocumentTypeSeeder;
 use Database\Seeders\Gender\GenderSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
     $this->call(
       [
         GenderSeeder::class,
+        DocumentTypeSeeder::class,
     ]);
   }
 }
