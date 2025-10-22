@@ -2,6 +2,7 @@
 
 namespace App\Models\DocumentType;
 
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 
 class DocumentType extends Model
@@ -14,4 +15,9 @@ class DocumentType extends Model
   protected $fillable = [
     'name',
   ];
+
+  public function user()
+  {
+    return $this->hasMany(User::class);
+  }
 }

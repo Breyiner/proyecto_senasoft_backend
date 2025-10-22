@@ -2,13 +2,10 @@
 
 use App\Http\Controllers\API\DocumentType\DocumentTypeController;
 use App\Http\Controllers\API\Gender\GenderController;
-use App\Models\User;
+use App\Http\Controllers\API\User\UserController;
+use App\Models\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/user', function (Request $request) {
-  return User::all();
-});
 
 Route::prefix('genders')->group(function () {
   Route::get('/', [GenderController::class, 'index']);
@@ -38,4 +35,19 @@ Route::prefix('document_types')->group(function () {
   Route::patch('/{document_type}', [DocumentTypeController::class, 'partialUpdate']);
 
   Route::delete('/{document_type}', [DocumentTypeController::class, 'destroy']);
+});
+
+
+Route::prefix('users')->group(function () {
+  Route::get('/', [UserController::class, 'index']);
+
+  Route::get('/{user}', [UserController::class, 'show']);
+
+  Route::post('/', [UserController::class, 'store']);
+
+  Route::put('/{user}', [UserController::class, 'update']);
+
+  Route::patch('/{user}', [UserController::class, 'partialUpdate']);
+  
+  Route::delete('/{user}', [UserController::class, 'destroy']);
 });
