@@ -6,6 +6,7 @@ use App\Models\User;
 use Database\Seeders\Airport\AirportSeeder;
 use Database\Seeders\City\CitySeeder;
 use Database\Seeders\DocumentType\DocumentTypeSeeder;
+use Database\Seeders\Flight\FlightSeeder;
 use Database\Seeders\Gender\GenderSeeder;
 use Database\Seeders\Plane\PlaneSeeder;
 use Database\Seeders\User\UserSeeder;
@@ -36,6 +37,7 @@ class DatabaseSeeder extends Seeder
         CitySeeder::class,
         AirportSeeder::class,
         PlaneSeeder::class,
+        FlightSeeder::class,
     ]);
   }
 }

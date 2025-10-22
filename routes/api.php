@@ -5,6 +5,7 @@ use App\Http\Controllers\API\Airport\AirportController;
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\City\CityController;
 use App\Http\Controllers\API\DocumentType\DocumentTypeController;
+use App\Http\Controllers\API\Flight\FlightController;
 use App\Http\Controllers\API\Gender\GenderController;
 use App\Http\Controllers\API\Plane\PlaneController;
 use App\Http\Controllers\API\User\UserController;
@@ -96,6 +97,20 @@ Route::prefix('planes')->group(function () {
   Route::patch('/{plane}', [PlaneController::class, 'partialUpdate']);
   
   Route::delete('/{plane}', [PlaneController::class, 'destroy']);
+});
+
+Route::prefix('flights')->group(function () {
+  Route::get('/', [FlightController::class, 'index']);
+
+  Route::get('/{flight}', [FlightController::class, 'show']);
+
+  Route::post('/', [FlightController::class, 'store']);
+
+  Route::put('/{flight}', [FlightController::class, 'update']);
+
+  Route::patch('/{flight}', [FlightController::class, 'partialUpdate']);
+  
+  Route::delete('/{flight}', [FlightController::class, 'destroy']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);
