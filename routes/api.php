@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\TokenAbility;
+use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\DocumentType\DocumentTypeController;
 use App\Http\Controllers\API\Gender\GenderController;
 use App\Http\Controllers\API\User\UserController;
@@ -19,7 +21,6 @@ Route::prefix('genders')->group(function () {
   Route::patch('/{gender_id}', [GenderController::class, 'partialUpdate']);
 
   Route::delete('/{gender_id}', [GenderController::class, 'destroy']);
-  
 });
 
 
@@ -48,6 +49,19 @@ Route::prefix('users')->group(function () {
   Route::put('/{user}', [UserController::class, 'update']);
 
   Route::patch('/{user}', [UserController::class, 'partialUpdate']);
-  
+
   Route::delete('/{user}', [UserController::class, 'destroy']);
 });
+
+
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(
+  function () {
+
+    Route::post('/refresh-token', [AuthController::class, 'refreshToken'])
+      ->middleware('ability:' . TokenAbility::ISSUE_ACCESS_TOKEN->value);
+
+    Route::post('/logout', [AuthController::class, 'logOut']);
+  }
+);
