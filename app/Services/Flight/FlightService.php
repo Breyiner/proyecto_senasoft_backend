@@ -78,7 +78,8 @@ class FlightService
       'destination_city_id',
       'departure_date',
       'departure_time',
-      'duration_hours'
+      'duration_hours',
+      'price'
     ]));
 
     return [

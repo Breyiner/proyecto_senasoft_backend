@@ -8,6 +8,7 @@ use Database\Seeders\City\CitySeeder;
 use Database\Seeders\DocumentType\DocumentTypeSeeder;
 use Database\Seeders\Flight\FlightSeeder;
 use Database\Seeders\Gender\GenderSeeder;
+use Database\Seeders\PaymentMethod\PaymentMethodSeeder;
 use Database\Seeders\Plane\PlaneSeeder;
 use Database\Seeders\User\UserSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
         AirportSeeder::class,
         PlaneSeeder::class,
         FlightSeeder::class,
+        PaymentMethodSeeder::class,
     ]);
   }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\API\City\CityController;
 use App\Http\Controllers\API\DocumentType\DocumentTypeController;
 use App\Http\Controllers\API\Flight\FlightController;
 use App\Http\Controllers\API\Gender\GenderController;
+use App\Http\Controllers\API\PaymentMethod\PaymentMethodController;
 use App\Http\Controllers\API\Plane\PlaneController;
 use App\Http\Controllers\API\User\UserController;
 use App\Models\User\User;
@@ -111,6 +112,20 @@ Route::prefix('flights')->group(function () {
   Route::patch('/{flight}', [FlightController::class, 'partialUpdate']);
   
   Route::delete('/{flight}', [FlightController::class, 'destroy']);
+});
+
+Route::prefix('payment_methods')->group(function () {
+  Route::get('/', [PaymentMethodController::class, 'index']);
+
+  Route::get('/{payment_method}', [PaymentMethodController::class, 'show']);
+
+  Route::post('/', [PaymentMethodController::class, 'store']);
+
+  Route::put('/{payment_method}', [PaymentMethodController::class, 'update']);
+
+  Route::patch('/{payment_method}', [PaymentMethodController::class, 'partialUpdate']);
+  
+  Route::delete('/{payment_method}', [PaymentMethodController::class, 'destroy']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);
