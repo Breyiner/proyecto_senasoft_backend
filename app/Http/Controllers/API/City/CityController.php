@@ -12,98 +12,101 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
-    protected $cityService;
+  protected $cityService;
 
-    public function __construct(CityService $cityService) {
+  public function __construct(CityService $cityService)
+  {
 
-        $this->cityService = $cityService;
+    $this->cityService = $cityService;
+  }
 
-    }
+  /**
+   * Display a listing of the resource.
+   */
+  public function index(Request $request)
+  {
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $response = $this->cityService->getAll();
+    $wordCity = $request->query('city');
 
-        if($response['error'])
-            return ResponseFormatter::error($response['message'], $response['code']);
+    $response = $this->cityService->getAll($wordCity);
 
-        return ResponseFormatter::success($response['message'], $response['code'], $response['data']??[]);
-    }
+    if ($response['error'])
+      return ResponseFormatter::error($response['message'], $response['code']);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        $response = $this->cityService->getCity($id);
+    return ResponseFormatter::success($response['message'], $response['code'], $response['data'] ?? []);
+  }
 
-        if($response['error'])
-            return ResponseFormatter::error($response['message'], $response['code']);
+  /**
+   * Display the specified resource.
+   */
+  public function show(string $id)
+  {
+    $response = $this->cityService->getCity($id);
 
-        return ResponseFormatter::success($response['message'], $response['code'], $response['data']??[]);
-    }
+    if ($response['error'])
+      return ResponseFormatter::error($response['message'], $response['code']);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreCityRequest $request)
-    {
+    return ResponseFormatter::success($response['message'], $response['code'], $response['data'] ?? []);
+  }
 
-        $data = $request->validated();
+  /**
+   * Store a newly created resource in storage.
+   */
+  public function store(StoreCityRequest $request)
+  {
 
-        $response = $this->cityService->createCity($data);
+    $data = $request->validated();
 
-        if($response['error'])
-            return ResponseFormatter::error($response['message'], $response['code']);
+    $response = $this->cityService->createCity($data);
 
-        return ResponseFormatter::success($response['message'], $response['code'], $response['data']??[]);
-    }
+    if ($response['error'])
+      return ResponseFormatter::error($response['message'], $response['code']);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCityRequest $request, string $id)
-    {
+    return ResponseFormatter::success($response['message'], $response['code'], $response['data'] ?? []);
+  }
 
-        $data = $request->validated();
+  /**
+   * Update the specified resource in storage.
+   */
+  public function update(UpdateCityRequest $request, string $id)
+  {
 
-        $response = $this->cityService->updateCity($data, $id);
+    $data = $request->validated();
 
-        if($response['error'])
-            return ResponseFormatter::error($response['message'], $response['code']);
+    $response = $this->cityService->updateCity($data, $id);
 
-        return ResponseFormatter::success($response['message'], $response['code'], $response['data']??[]);
-    }
+    if ($response['error'])
+      return ResponseFormatter::error($response['message'], $response['code']);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function partialUpdate(PartialUpdateCityRequest $request, string $id)
-    {
+    return ResponseFormatter::success($response['message'], $response['code'], $response['data'] ?? []);
+  }
 
-        $data = $request->validated();
+  /**
+   * Update the specified resource in storage.
+   */
+  public function partialUpdate(PartialUpdateCityRequest $request, string $id)
+  {
 
-        $response = $this->cityService->partialUpdateCity($data, $id);
+    $data = $request->validated();
 
-        if($response['error'])
-            return ResponseFormatter::error($response['message'], $response['code']);
+    $response = $this->cityService->partialUpdateCity($data, $id);
 
-        return ResponseFormatter::success($response['message'], $response['code'], $response['data']??[]);
-    }
+    if ($response['error'])
+      return ResponseFormatter::error($response['message'], $response['code']);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $response = $this->cityService->deleteCity($id);
+    return ResponseFormatter::success($response['message'], $response['code'], $response['data'] ?? []);
+  }
 
-        if($response['error'])
-            return ResponseFormatter::error($response['message'], $response['code']);
+  /**
+   * Remove the specified resource from storage.
+   */
+  public function destroy(string $id)
+  {
+    $response = $this->cityService->deleteCity($id);
 
-        return ResponseFormatter::success($response['message'], $response['code'], $response['data']??[]);
-    }
+    if ($response['error'])
+      return ResponseFormatter::error($response['message'], $response['code']);
+
+    return ResponseFormatter::success($response['message'], $response['code'], $response['data'] ?? []);
+  }
 }

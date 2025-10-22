@@ -2,6 +2,7 @@
 
 namespace App\Models\City;
 
+use App\Models\Airport\Airport;
 use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
@@ -16,4 +17,8 @@ class City extends Model
     'IATA',
   ];
 
+  public function airport()
+  {
+    return $this->hasOne(Airport::class);
+  }
 }

@@ -8,10 +8,14 @@ use Illuminate\Support\Arr;
 class CityService
 {
 
-  public static function getAll()
+  public static function getAll($wordCity)
   {
 
-    $cities = City::all();
+    if (!$wordCity)
+      $cities = City::all();
+
+    else
+      $cities = City::where("name", "like", "%" . $wordCity . "%")->get();
 
     if (count($cities) == 0)
       return [
@@ -21,6 +25,14 @@ class CityService
         "data" => $cities
       ];
 
+    $cities = $cities->map(function ($city) {
+      return [
+        'id' => $city->id,
+        'name' => $city->name,
+        'IATA' => $city->IATA,
+        'airport' => $city->airport->name,
+      ];
+    })->toArray();
 
     return [
       "error" => false,
