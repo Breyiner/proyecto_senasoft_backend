@@ -2,6 +2,7 @@
 
 use App\Enums\TokenAbility;
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\City\CityController;
 use App\Http\Controllers\API\DocumentType\DocumentTypeController;
 use App\Http\Controllers\API\Gender\GenderController;
 use App\Http\Controllers\API\User\UserController;
@@ -53,6 +54,19 @@ Route::prefix('users')->group(function () {
   Route::delete('/{user}', [UserController::class, 'destroy']);
 });
 
+Route::prefix('cities')->group(function () {
+  Route::get('/', [CityController::class, 'index']);
+
+  Route::get('/{city_id}', [CityController::class, 'show']);
+
+  Route::post('/', [CityController::class, 'store']);
+
+  Route::put('/{city_id}', [CityController::class, 'update']);
+
+  Route::patch('/{city_id}', [CityController::class, 'partialUpdate']);
+  
+  Route::delete('/{city_id}', [CityController::class, 'destroy']);
+});
 
 Route::post('/login', [AuthController::class, 'login']);
 
