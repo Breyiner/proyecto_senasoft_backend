@@ -3,6 +3,8 @@
 namespace App\Services\Booking;
 
 use App\Models\Booking\Booking;
+use App\Models\User\User;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
 class BookingService
@@ -45,6 +47,50 @@ class BookingService
       "code" => 200,
       "message" => "Reserva obtenida con éxito",
       "data" => $booking,
+    ];
+  }
+
+  public function getTicket($user_id)
+  {
+    $user = User::with(['booking.flight.originCity', 'booking.flight.destinationCity', 'booking.flight.plane'])
+      ->find($user_id);
+
+    if (!$user) {
+      return [
+        "error" => true,
+        "code" => 404,
+        "message" => "Usuario no encontrado",
+      ];
+    }
+
+    $tickets = [];
+
+    foreach ($user->booking as $booking) {
+      $flight = $booking->flight;
+
+      $pivotData = $booking->users()->where('users.id', $user_id)->first()->pivot;
+
+      $tickets[] = [
+        'passenger_name' => $user->names . ' ' . $user->first_lastname . ' ' . $user->second_lastname,
+        'document_number' => $user->document_number,
+        'flight' => [
+          'origin' => $flight->originCity->name,
+          'destination' => $flight->destinationCity->name,
+          'plane' => $flight->plane->model ?? '',
+          'departure_date' => $flight->departure_date,
+          'departure_time' => $flight->departure_time,
+          "landing_time" => Carbon::parse($flight->departure_time)->addHours($flight->duration_hours)->format('H:i:s'),
+          "duration_hours" => $flight->duration_hours,
+          'seat_number' => $pivotData->seat_number ?? null,
+        ],
+      ];
+    }
+
+    return [
+      "error" => false,
+      "code" => 200,
+      "message" => "Ticket obtenido con éxito",
+      "data" => $tickets,
     ];
   }
 

@@ -137,6 +137,8 @@ Route::prefix('bookings')->group(function () {
 
   Route::get('/{booking}', [BookingController::class, 'show']);
 
+  Route::get('/ticket/user/{user}', [BookingController::class, 'bookingTicket']);
+
   Route::post('/', [BookingController::class, 'store']);
   
   Route::put('/{booking}', [BookingController::class, 'update']);
