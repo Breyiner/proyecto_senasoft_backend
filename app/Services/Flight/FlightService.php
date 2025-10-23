@@ -3,6 +3,7 @@
 namespace App\Services\Flight;
 
 use App\Models\Flight\Flight;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
 class FlightService
@@ -31,13 +32,15 @@ class FlightService
 
       return [
         "id" => 3,
+        "plane_id" => $flight->plane_id,
         "plane" => $flight->plane->name,
         "origin_city" => $flight->originCity->name,
         "destination_city" => $flight->destinationCity->name,
-        "departure_date" => "2025-11-03",
-        "departure_time" => "15:20:00",
-        "duration_hours" => 1,
-        "price" => "220000.00",
+        "departure_date" => $flight->departure_date,
+        "departure_time" => $flight->departure_time,
+        "landing_time" => Carbon::parse($flight->departure_time)->addHours($flight->duration_hours)->format('H:i:s'),
+        "duration_hours" => $flight->duration_hours,
+        "price" => $flight->price,
       ];
     });
 

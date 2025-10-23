@@ -28,7 +28,7 @@ class PlaneService
     ];
   }
 
-  public function getById($id)
+  public function getById($id, $flight_id)
   {
     $plane = Plane::find($id);
 
@@ -39,6 +39,24 @@ class PlaneService
         "message" => "Avión no encontrado",
       ];
     }
+
+    $flight = $plane->flights()->where('id', $flight_id)->first();
+    $bookings = $flight->bookings()->where('flight_id', $flight_id)->get();
+    $occupiedSeats = $bookings->map(function ($booking) {
+
+      return $booking->users->map(function ($user) {
+        return $user->pivot->seat_number;
+      });
+    });
+
+    $plane = [
+      'id' => $plane->id,
+      'name' => $plane->name,
+      'airline' => $plane->airline,
+      "seats_amount" => $plane->seats_amount,
+      "model" => $plane->model,
+      "occupied_seats" => $occupiedSeats
+    ];
 
     return [
       "error" => false,

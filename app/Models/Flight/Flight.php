@@ -2,6 +2,7 @@
 
 namespace App\Models\Flight;
 
+use App\Models\Booking\Booking;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Plane\Plane;
@@ -34,5 +35,10 @@ class Flight extends Model
   public function destinationCity()
   {
     return $this->belongsTo(City::class, 'destination_city_id');
+  }
+
+  public function bookings()
+  {
+    return $this->hasMany(Booking::class);
   }
 }

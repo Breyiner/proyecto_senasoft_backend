@@ -8,6 +8,7 @@ use App\Http\Requests\Plane\StorePlaneRequest;
 use App\Http\Requests\Plane\UpdatePlaneRequest;
 use App\Http\Requests\Plane\PartialUpdatePlaneRequest;
 use App\Services\Plane\PlaneService;
+use Illuminate\Http\Request;
 
 class PlaneController extends Controller
 {
@@ -28,9 +29,12 @@ class PlaneController extends Controller
     return ResponseFormatter::success($response['message'], $response['code'], $response['data'] ?? []);
   }
 
-  public function show(string $id)
+  public function show(Request $request, string $id)
   {
-    $response = $this->service->getById($id);
+
+    $flight = $request->query('vuelo');
+
+    $response = $this->service->getById($id, $flight);
 
     if ($response['error'])
       return ResponseFormatter::error($response['message'], $response['code']);
