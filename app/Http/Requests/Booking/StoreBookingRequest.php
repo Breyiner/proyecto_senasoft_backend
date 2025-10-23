@@ -16,6 +16,8 @@ class StoreBookingRequest extends FormRequest
     return [
       'payment_id' => 'required|exists:payments,id',
       'flight_id' => 'required|exists:flights,id',
+      'seat' => 'required',
+      'user_id' => 'required'
     ];
   }
 

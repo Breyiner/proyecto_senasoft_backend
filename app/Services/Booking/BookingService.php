@@ -52,6 +52,15 @@ class BookingService
   {
     $booking = Booking::create($data);
 
+    $booking->users()->attach([
+      $data['user_id'] => ['seat_number' => $data['seat']],
+    ]);
+
+    $booking = [
+      $booking,
+      $booking->users,
+    ];
+
     return [
       'error' => false,
       'code' => 201,

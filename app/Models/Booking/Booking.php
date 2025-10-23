@@ -15,6 +15,8 @@ class Booking extends Model
   protected $fillable = [
     'payment_id',
     'flight_id',
+    'seat',
+    'user_id'
   ];
 
   public function payment()
