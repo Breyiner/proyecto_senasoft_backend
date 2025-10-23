@@ -107,6 +107,8 @@ Route::prefix('flights')->group(function () {
 
   Route::get('/{flight}', [FlightController::class, 'show']);
 
+  Route::get('/user/{user}', [FlightController::class, 'showByUser']);
+
   Route::post('/', [FlightController::class, 'store']);
 
   Route::put('/{flight}', [FlightController::class, 'update']);

@@ -50,6 +50,15 @@ class FlightController extends Controller
     return ResponseFormatter::success($response['message'], $response['code'], $response['data'] ?? []);
   }
 
+  public function showByUser($user_id){
+    $response = $this->service->getByUser($user_id);
+
+    if ($response['error'])
+      return ResponseFormatter::error($response['message'], $response['code']);
+
+    return ResponseFormatter::success($response['message'], $response['code'], $response['data'] ?? []);
+  }
+
   public function store(StoreFlightRequest $request)
   {
     $data = $request->validated();

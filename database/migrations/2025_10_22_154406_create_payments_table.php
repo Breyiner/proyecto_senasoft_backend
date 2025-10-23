@@ -18,6 +18,7 @@ return new class extends Migration
       $table->string('document_number');
       $table->string('email')->nullable();
       $table->string('phone')->nullable();
+      $table->double('price');
       $table->timestamps();
 
       $table->foreign('document_type_id')->references('id')->on('document_types');

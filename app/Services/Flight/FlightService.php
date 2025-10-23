@@ -3,6 +3,7 @@
 namespace App\Services\Flight;
 
 use App\Models\Flight\Flight;
+use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
@@ -43,6 +44,48 @@ class FlightService
         "price" => $flight->price,
       ];
     });
+
+    return [
+      "error" => false,
+      "code" => 200,
+      "message" => "Vuelos obtenidos con éxito",
+      "data" => $flights,
+    ];
+  }
+
+  public function getByUser($user_id) {
+
+    $user = User::find($user_id);
+
+    $bookings = $user->booking;
+
+    $userFlights = $bookings->map(function ($booking) {
+      return $booking->flight;
+    });
+
+    $flights = $userFlights->map(function ($flight) {
+
+      return [
+        "id" => 3,
+        "plane_id" => $flight->plane_id,
+        "plane" => $flight->plane->name,
+        "origin_city" => $flight->originCity->name,
+        "destination_city" => $flight->destinationCity->name,
+        "departure_date" => $flight->departure_date,
+        "departure_time" => $flight->departure_time,
+        "landing_time" => Carbon::parse($flight->departure_time)->addHours($flight->duration_hours)->format('H:i:s'),
+        "duration_hours" => $flight->duration_hours,
+        "price" => $flight->price,
+      ];
+    });
+
+    if (!$flights) {
+      return [
+        "error" => true,
+        "code" => 404,
+        "message" => "Vuelos no encontrados",
+      ];
+    }
 
     return [
       "error" => false,

@@ -18,6 +18,7 @@ class Payment extends Model
     'email',
     'phone',
     'payment_method_id',
+    'price'
   ];
 
   public function documentType()
